@@ -1,0 +1,10 @@
+C:\Users\Maaz Abdullah\Documents\braincoin\target\debug\deps\rand_core-7e1461f8aec3881e.d: C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\lib.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\error.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\block.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\impls.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\le.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\os.rs
+
+C:\Users\Maaz Abdullah\Documents\braincoin\target\debug\deps\librand_core-7e1461f8aec3881e.rmeta: C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\lib.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\error.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\block.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\impls.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\le.rs C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\os.rs
+
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\lib.rs:
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\error.rs:
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\block.rs:
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\impls.rs:
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\le.rs:
+C:\Users\Maaz\ Abdullah\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_core-0.5.1\src\os.rs:

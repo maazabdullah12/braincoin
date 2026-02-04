@@ -1,0 +1,38 @@
+[build]
+skip-lint = false
+
+[toolchain]
+anchor_version = "0.32.1"
+
+[features]
+idl-build = ["anchor-lang/idl-build"]
+seeds = ["anchor-lang/seeds"]
+init-if-needed = ["anchor-lang/init-if-needed"]
+
+[programs.devnet]
+brain = "11111111111111111111111111111111"
+guardian = "11111111111111111111111111111111"
+agent_syndicate = "11111111111111111111111111111111"
+fee_collector = "11111111111111111111111111111111"
+
+[programs.localnet]
+brain = "11111111111111111111111111111111"
+guardian = "11111111111111111111111111111111"
+agent_syndicate = "11111111111111111111111111111111"
+fee_collector = "11111111111111111111111111111111"
+
+[programs.mainnet]
+brain = "11111111111111111111111111111111"
+guardian = "11111111111111111111111111111111"
+agent_syndicate = "11111111111111111111111111111111"
+fee_collector = "11111111111111111111111111111111"
+
+[registry]
+url = "https://api.github.com/repos/coral-xyz/anchor"
+
+[provider]
+cluster = "Devnet"
+wallet = "c:\\Users\\Maaz Abdullah\\.config\\solana\\id.json"
+
+[scripts]
+test = "cargo test --test '*' -- --nocapture"
