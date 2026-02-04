@@ -14,51 +14,46 @@ jobs:
     
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
-    
-    - name: Add SBF target
-      run: rustup target add sbf-solana-solana
+      with:
+        targets: sbf-solana-solana
     
     - name: Install Solana CLI
       run: |
         sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+        export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
         echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-        source $HOME/.bashrc
     
-    - name: Cache cargo registry
+    - name: Install Anchor CLI
+      run: |
+        npm install -g @project-serum/anchor-cli
+        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+    
+    - name: Use latest Anchor
+      run: avm install latest && avm use latest
+    
+    - name: Cache cargo
       uses: actions/cache@v3
       with:
-        path: ~/.cargo/registry
-        key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     
-    - name: Cache cargo index
-      uses: actions/cache@v3
-      with:
-        path: ~/.cargo/git
-        key: ${{ runner.os }}-cargo-git-${{ hashFiles('**/Cargo.lock') }}
+    - name: Build all programs with Anchor
+      run: anchor build --skip-lint
     
-    - name: Cache cargo build
-      uses: actions/cache@v3
-      with:
-        path: target
-        key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
-    
-    - name: Build Brain Program
-      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/brain/Cargo.toml --release
-    
-    - name: Build Guardian Program
-      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/guardian/Cargo.toml --release
-    
-    - name: Build Agent Syndicate Program
-      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/agent-syndicate/Cargo.toml --release
-    
-    - name: Build Fee Collector Program
-      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/fee-collector/Cargo.toml --release
+    - name: Copy artifacts
+      run: |
+        mkdir -p artifacts
+        cp target/sbf-solana-solana/release/*.so artifacts/ || true
+        ls -la artifacts/
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: solana-programs
-        path: target/sbf-solana-solana/release/*.so
+        path: artifacts/*.so
         retention-days: 30
         asset_path: ./target/sbf-solana-solana/release/brain.so
         asset_name: brain.so
