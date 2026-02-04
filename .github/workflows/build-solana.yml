@@ -15,17 +15,14 @@ jobs:
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
     
-    - name: Install SBF target
-      run: |
-        rustup target add sbf-solana-solana
+    - name: Add SBF target
+      run: rustup target add sbf-solana-solana
     
     - name: Install Solana CLI
       run: |
         sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
         echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-    
-    - name: Install cargo-build-sbf
-      run: cargo install cargo-build-sbf
+        source $HOME/.bashrc
     
     - name: Cache cargo registry
       uses: actions/cache@v3
@@ -46,16 +43,16 @@ jobs:
         key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
     
     - name: Build Brain Program
-      run: cargo build-sbf --manifest-path programs/brain/Cargo.toml --release
+      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/brain/Cargo.toml --release
     
     - name: Build Guardian Program
-      run: cargo build-sbf --manifest-path programs/guardian/Cargo.toml --release
+      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/guardian/Cargo.toml --release
     
     - name: Build Agent Syndicate Program
-      run: cargo build-sbf --manifest-path programs/agent-syndicate/Cargo.toml --release
+      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/agent-syndicate/Cargo.toml --release
     
     - name: Build Fee Collector Program
-      run: cargo build-sbf --manifest-path programs/fee-collector/Cargo.toml --release
+      run: ~/.local/share/solana/install/active_release/bin/cargo-build-sbf --manifest-path programs/fee-collector/Cargo.toml --release
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
@@ -63,31 +60,6 @@ jobs:
         name: solana-programs
         path: target/sbf-solana-solana/release/*.so
         retention-days: 30
-    
-    - name: Create Release
-      uses: actions/create-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Compiled Solana Programs
-          - brain.so
-          - guardian.so
-          - agent_syndicate.so
-          - fee_collector.so
-        draft: false
-        prerelease: false
-    
-    - name: Upload Release Assets
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./target/sbf-solana-solana/release/brain.so
         asset_name: brain.so
         asset_content_type: application/octet-stream
