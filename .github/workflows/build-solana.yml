@@ -54,7 +54,7 @@ jobs:
       run: cargo build-sbf --manifest-path programs/fee-collector/Cargo.toml --release
     
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: solana-programs
         path: target/sbf-solana-solana/release/*.so
